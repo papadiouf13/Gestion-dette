@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Article {
+  id            Int      @id @default(autoincrement())
+  libelle       String   @unique
+  prix          Float
+  quantiteStock Int
+  dettes        Dette[]        @relation("DetteArticle")
+  ArticleDette  ArticleDette[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email      String   @unique
+  password  String
+  role      Role     @default(CLIENT)
+  clientId  Int      @unique
+  client    Client   @relation(fields: [clientId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+  model Client {
+    id        Int      @id @default(autoincrement())
+    nom       String
+    prenom    String
+    telephone String
+    photo     String
+    dettes    Dette[]
+    user      User?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+  }
+
+enum Role {
+  BOUTIQUIER
+  CLIENT
+  ADMIN
+}
+
+model Dette {
+  id            Int            @id @default(autoincrement())
+  clientId      Int
+  date          DateTime
+  montantDue    Float
+  montantVerser Float
+  client        Client         @relation(fields: [clientId], references: [id])
+  articles      Article[]      @relation("DetteArticle")
+  Paiement      Paiement[]
+  ArticleDette  ArticleDette[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ArticleDette {
+  detteId              Int
+  articleId            Int
+  quantiteArticleDette Int
+  dette                Dette   @relation(fields: [detteId], references: [id])
+  article              Article @relation(fields: [articleId], references: [id])
+
+  @@id([detteId, articleId])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Paiement {
+  id      Int      @id @default(autoincrement())
+  detteId Int
+  montant Float
+  date    DateTime
+  dette   Dette    @relation(fields: [detteId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
