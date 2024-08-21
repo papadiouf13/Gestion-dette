@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import routerArticle from './routes/article.route';
 import routerClient from './routes/client.route';
 import routerDette from './routes/dette.route';
@@ -21,6 +22,10 @@ class App {
     }
 
     middleware() {
+        this.server.use(cors({
+            origin: 'http://localhost:5174', 
+            credentials: true,
+        }));
         this.server.use(express.json());
         this.server.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec))
     }
