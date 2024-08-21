@@ -205,7 +205,7 @@ routerClient.get("/", [authentification(),roleautorisation(["BOUTIQUIER"])],clie
  *       '500':
  *         description: Erreur serveur
  */
-routerClient.post("/",[authentification(),roleautorisation(["BOUTIQUIER"]),validatorSchema()], clientController.store);
+routerClient.post("/", clientController.store);
 
 /**
  * @openapi

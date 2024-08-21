@@ -30,7 +30,7 @@ const authController = new AuthController();
  *       '409':
  *         description: Conflict - Utilisateur déjà existant
  */
-routerAuth.post('/register', [authentification(), roleautorisation(["ADMIN"])], authController.register);
+routerAuth.post('/register', authController.register);
 
 /**
  * @openapi

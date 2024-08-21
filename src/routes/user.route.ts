@@ -33,7 +33,7 @@ const userController = new UserController();
  *       '500':
  *         description: Internal Server Error - Erreur serveur
  */
-routerUser.post('/register',[authentification(), roleautorisation(['ADMIN']), validatorSchema()],userController.register);
+routerUser.post('/register',userController.register);
 
 /**
  * @openapi
