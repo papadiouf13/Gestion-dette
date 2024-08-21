@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon - exec 'ts-node' src/server.ts",
-    "build": "tsc",
-    "serve": "node dist/server.js",
-    "db:migrate": " npx prisma migrate dev --name user-entity --create-only && npx prisma generate ",
-    "db:push": " npx prisma db push",
-    "db:show": " npx prisma show"
+  "start": "npx prisma migrate deploy && node dist/server.js",
+  "build": "tsc",
+  "serve": "node dist/server.js",
+  "db:migrate": "npx prisma migrate dev --name user-entity --create-only && npx prisma generate",
+  "db:push": "npx prisma db push",
+  "db:show": "npx prisma show"
   },
   "keywords": [],
   "author": "",
