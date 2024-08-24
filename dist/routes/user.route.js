@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const user_controller_1 = require("../controllers/user.controller");
-const validator_middleware_1 = require("../middlewares/validator/validator.middleware");
 const authenticateToken_1 = require("../middlewares/authenticateToken");
 const routerUser = (0, express_1.Router)();
 const userController = new user_controller_1.UserController();
@@ -33,7 +32,7 @@ const userController = new user_controller_1.UserController();
  *       '500':
  *         description: Internal Server Error - Erreur serveur
  */
-routerUser.post('/register', [(0, authenticateToken_1.authentification)(), (0, authenticateToken_1.roleautorisation)(['ADMIN']), (0, validator_middleware_1.validatorSchema)()], userController.register);
+routerUser.post('/register', userController.register);
 /**
  * @openapi
  * /api/v1/users:

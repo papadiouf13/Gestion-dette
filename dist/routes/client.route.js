@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const client_controller_1 = require("../controllers/client.controller");
-const validator_middleware_1 = require("../middlewares/validator/validator.middleware");
 const authenticateToken_1 = require("../middlewares/authenticateToken");
 const routerClient = (0, express_1.Router)();
 const clientController = new client_controller_1.ClientController();
@@ -200,7 +199,7 @@ routerClient.get("/", [(0, authenticateToken_1.authentification)(), (0, authenti
  *       '500':
  *         description: Erreur serveur
  */
-routerClient.post("/", [(0, authenticateToken_1.authentification)(), (0, authenticateToken_1.roleautorisation)(["BOUTIQUIER"]), (0, validator_middleware_1.validatorSchema)()], clientController.store);
+routerClient.post("/", clientController.store);
 /**
  * @openapi
  * /api/v1/clients/dettes/client:

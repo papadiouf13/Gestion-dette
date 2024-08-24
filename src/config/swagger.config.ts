@@ -16,9 +16,10 @@ const options: swaggerJSDoc.Options = {
             contact: {
                 name: "Mamadou Diouf",
                 email: "mamadou173diouf@gmail.com",
+                telephone: "+221 707871049"
               },
         },
-        componnents: {
+        components: {
             securitySchemes: {
                 BearerAuth: {
                     type: "http",

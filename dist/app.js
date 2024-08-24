@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
 const article_route_1 = __importDefault(require("./routes/article.route"));
 const client_route_1 = __importDefault(require("./routes/client.route"));
 const dette_route_1 = __importDefault(require("./routes/dette.route"));
@@ -21,6 +22,10 @@ class App {
         this.prisma = prisma_config_1.default;
     }
     middleware() {
+        this.server.use((0, cors_1.default)({
+            origin: 'http://localhost:5174',
+            credentials: true,
+        }));
         this.server.use(express_1.default.json());
         this.server.use("/docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_config_1.swaggerSpec));
     }

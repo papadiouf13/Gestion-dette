@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const auth_controller_1 = require("../controllers/auth.controller");
-const authenticateToken_1 = require("../middlewares/authenticateToken");
 const routerAuth = (0, express_1.Router)();
 const authController = new auth_controller_1.AuthController();
 /**
@@ -30,7 +29,7 @@ const authController = new auth_controller_1.AuthController();
  *       '409':
  *         description: Conflict - Utilisateur déjà existant
  */
-routerAuth.post('/register', [(0, authenticateToken_1.authentification)(), (0, authenticateToken_1.roleautorisation)(["ADMIN"])], authController.register);
+routerAuth.post('/register', authController.register);
 /**
  * @openapi
  * /api/v1/auth/login:
