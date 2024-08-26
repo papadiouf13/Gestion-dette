@@ -23,7 +23,7 @@ class App {
     }
     middleware() {
         this.server.use((0, cors_1.default)({
-            origin: 'http://localhost:5174',
+            origin: 'http://localhost:5173',
             credentials: true,
         }));
         this.server.use(express_1.default.json());
@@ -33,8 +33,8 @@ class App {
         this.server.use("/api/v1/articles", article_route_1.default);
         this.server.use("/api/v1/clients", client_route_1.default);
         this.server.use("/api/v1/dettes", dette_route_1.default);
+        this.server.use("/api/v1/paiements", paiement_route_1.default);
         this.server.use('/api/v1/auth', auth_route_1.default);
-        this.server.use('/api/v1/dettes', paiement_route_1.default);
         this.server.use('/api/v1/users', user_route_1.default);
     }
 }
