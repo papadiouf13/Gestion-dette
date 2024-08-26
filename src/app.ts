@@ -27,15 +27,15 @@ class App {
             credentials: true,
         }));
         this.server.use(express.json());
-        this.server.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+        this.server.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
     }
 
     routes() {
         this.server.use("/api/v1/articles", routerArticle);
         this.server.use("/api/v1/clients", routerClient);
         this.server.use("/api/v1/dettes", routerDette);
+        this.server.use("/api/v1/paiements", routerPaiement); 
         this.server.use('/api/v1/auth', routerAuth);
-        this.server.use('/api/v1/dettes', routerPaiement);
         this.server.use('/api/v1/users', routerUser);
     }
 }
